@@ -14,4 +14,4 @@ def sub(Name,SubID,registry_date,absents,Stdgrade,StdID,InsID):
           con.commit()
           con.close()
 
-sub("python",0125,'2014-03-10',2,99,2010,0215)
+
