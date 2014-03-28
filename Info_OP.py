@@ -1,15 +1,14 @@
-#students Operations
-
+#Info operations
 ###########################
 import MySQLdb
 import DB_OP
 
 ###########################
-def std(Name,StdID,SubID):
+def info(StdID,SubjID,RegDate,absents):
      try:
-          con = DB_OP.connect()
+          con=DB_OP.connect()
           cur=con.cursor()
-          cur.execute("""INSERT INTO students (Name,StdID,SubID) VALUES('%s','%s','%s')"""%(Name,StdID,SubID))
+          cur.execute("""INSERT INTO info (StdID,SubjID,RegDate,absents) VALUES('%s','%s','%s','%s')"""%(StdID,SubjID,RegDate,absents))
      except Exception,error:
           print(error)
      finally:
