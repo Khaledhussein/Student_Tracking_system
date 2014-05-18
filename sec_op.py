@@ -5,11 +5,11 @@ import MySQLdb
 import DB_OP
 
 ###########################
-def sec(SecID,Name,SubjID,InstID):
+def sec(SecID,SubjID,InstID,Name="NULL"):
      try:
           con = DB_OP.connect()
           cur=con.cursor()
-          cur.execute("""INSERT INTO sections (SecID,Name,SubjID,InstID) VALUES('%s','%s','%s','%s')"""%(SecID,Name,SubjID,InstID))
+          cur.execute("""INSERT INTO sections (SecID,SubjID,InstID,Name) VALUES('%s','%s','%s',%s)"""%(SecID,SubjID,InstID,Name))
      except Exception,error:
           print(error)
      finally:
@@ -36,4 +36,4 @@ def delete(SecID,SubjID,InstID):
          print(error)
      finally:
           edit.commit()
-          DP_OP.disconnect()
+          DB_OP.disconnect()

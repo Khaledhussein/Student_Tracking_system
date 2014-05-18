@@ -5,11 +5,11 @@ import MySQLdb
 import DB_OP
 
 ###########################
-def std(StdID,FName,LName,phone_no,Email):
+def std(StdID,FName="NULL",LName="NULL",phone_no="NULL",Email="NULL"):
      try:
           con=DB_OP.connect()
           cur=con.cursor()
-          cur.execute("""INSERT INTO students (StdID,FName,LName,phone_no,Email) VALUES('%s','%s','%s','%s','%s')"""%(StdID,FName,LName,phone_no,Email))
+          cur.execute("""INSERT INTO students (StdID,FName,LName,phone_no,Email) VALUES(%d,%s,%s,%s,%s)"""%(StdID,FName,LName,phone_no,Email))
      except Exception,error:
           print(error)
      finally:
@@ -17,12 +17,11 @@ def std(StdID,FName,LName,phone_no,Email):
           DB_OP.disconnect()
 
 
-def updating(StdID,NStdID,FName,LName,phone_no,Email):
+def update(StdID,NStdID,FName,LName,phone_no,Email):
      try:
           edit = DB_OP.connect()
           cur=edit.cursor()
-          cur.execute("DELETE FROM students WHERE InstID =%s"%(StdID))
-          cur.execute("""INSERT INTO studnets (StdID,FName,LName,phone_no,Email) VALUES('%s','%s','%s','%s','%s')"""%(NStdID,FName,LName,phone_no,Email))
+          cur.execute("UPDATE sts.students SET StdID='%s',FName='%s',LName='%s',Phone_no ='%d',Email='%s' WHERE students.StdID='%s'"%(NStdID,FName,LName,phone_no,Email,StdID))
      except Exception,error:
          print(error)
      finally:
@@ -39,15 +38,3 @@ def query():
      Q.execute("select * from students")
      print Q.fetchall()
 
-
-
-def delete(StdID):
-     try:
-          edit = DB_OP.connect()
-          cur=edit.cursor()
-          cur.execute("DELETE FROM students WHERE StdID =%s"%(StdID))
-     except Exception,error:
-         print(error)
-     finally:
-          edit.commit()
-          DP_OP.disconnect()

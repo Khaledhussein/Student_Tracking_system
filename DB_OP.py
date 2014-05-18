@@ -27,12 +27,12 @@ def initializing():
         #CTSD is a variable includes creating table for student's marks.
 
         
-        CTIN="""CREATE TABLE instructors (InstID INT(9) NOT NULL PRIMARY KEY,FName char(10),LName char(10),phone_no int(10),Email char(20))"""
+        CTIN="""CREATE TABLE instructors (InstID INT(9) NOT NULL PRIMARY KEY,FName char(10),LName char(10),phone_no char(10),Email char(30))"""
         cur.execute(CTIN)
         #CTIN is a variable includes creating table for instructors.
 
 
-        CTST="""CREATE TABLE students (StdID INT(9) NOT NULL PRIMARY KEY,FName char(10),LName char(10),phone_no int(10),Email char(20))"""
+        CTST="""CREATE TABLE students (StdID INT(9) NOT NULL PRIMARY KEY,FName char(10),LName char(10),phone_no char(10),Email char(30))"""
         cur.execute(CTST)
         #CTST is a variable includes creating table for students.
 
@@ -66,8 +66,20 @@ def initializing():
         cur.execute("ALTER TABLE sections ADD FOREIGN KEY (SubjID) REFERENCES sts.subjects (SubjID)")
         cur.execute("ALTER TABLE sections ADD FOREIGN KEY (InstID) REFERENCES sts.instructors (InstID)")
 
-    except Exception,error:
-        print (error)
+    except Exception:
+        print ("You have created your DataBase Before")
 
     finally:
+        disconnect()
+
+def CLS():
+    try:
+        Command=input("insert your MySQL statment starting with \" and finsh it with\" : \n")
+        connect()
+        cur=connect().cursor()
+        cur.execute(Command)
+        print cur.fetchall()
+    except Exception,r:
+        print r
+        cur.commit()
         disconnect()
