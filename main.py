@@ -33,6 +33,7 @@ while True:
 4-Sections operations
 5-Attendance operations
 6-Marks operations
+7-make your own MySQL statement
 """
      select=input("\n")
      if select==1:
@@ -222,6 +223,8 @@ while True:
                marks_op.querymarks(StdID,SecID)
           elif Maselect == 8:
                marks_op.query()
+     elif select == 7:
+          DB_OP.CLS()
      
           
 
