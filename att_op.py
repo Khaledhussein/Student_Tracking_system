@@ -48,4 +48,3 @@ def absents(StdID,SecID):
      cur=con.cursor()
      cur.execute("select absents from attendance where StdID=%s AND SecID=%s"%(StdID,SecID))
      return cur.fetchall()
-

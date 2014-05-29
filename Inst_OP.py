@@ -36,4 +36,3 @@ def query():
      Q=con.cursor()
      Q.execute("select * from instructors")
      print Q.fetchall()
-

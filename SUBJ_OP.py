@@ -18,8 +18,7 @@ def update(SubjID,NSubjID,Name,description):
      try:
           edit = DB_OP.connect()
           cur=edit.cursor()
-          cur.execute("DELETE FROM subjects WHERE SubjID =%s"%(SubjID))
-          cur.execute("""INSERT INTO subjects (SubjID,Name,description) VALUES(%s,%s,%s)"""%(NSubjID,Name,description))
+          cur.execute("UPDATE sts.subjects SET SubjID=%s,Name=%s,description=%s WHERE subjects.SubjID=%s"%(NSubjID,Name,description,SubjID))
      except Exception,error:
          print(error)
      finally:

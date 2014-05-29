@@ -9,7 +9,7 @@ def std(StdID,FName="NULL",LName="NULL",phone_no="NULL",Email="NULL"):
      try:
           con=DB_OP.connect()
           cur=con.cursor()
-          cur.execute("""INSERT INTO students (StdID,FName,LName,phone_no,Email) VALUES(%d,%s,%s,%s,%s)"""%(StdID,FName,LName,phone_no,Email))
+          cur.execute("""INSERT INTO students (StdID,FName,LName,phone_no,Email) VALUES(%s,%s,%s,%s,%s)"""%(StdID,FName,LName,phone_no,Email))
      except Exception,error:
           print(error)
      finally:
@@ -21,7 +21,7 @@ def update(StdID,NStdID,FName,LName,phone_no,Email):
      try:
           edit = DB_OP.connect()
           cur=edit.cursor()
-          cur.execute("UPDATE sts.students SET StdID='%s',FName='%s',LName='%s',Phone_no ='%d',Email='%s' WHERE students.StdID='%s'"%(NStdID,FName,LName,phone_no,Email,StdID))
+          cur.execute("UPDATE sts.students SET StdID=%s,FName=%s,LName=%s,Phone_no =%s,Email=%s WHERE students.StdID=%s"%(NStdID,FName,LName,phone_no,Email,StdID))
      except Exception,error:
          print(error)
      finally:

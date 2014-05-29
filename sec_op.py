@@ -9,7 +9,7 @@ def sec(SecID,SubjID,InstID,Name="NULL"):
      try:
           con = DB_OP.connect()
           cur=con.cursor()
-          cur.execute("""INSERT INTO sections (SecID,SubjID,InstID,Name) VALUES('%s','%s','%s',%s)"""%(SecID,SubjID,InstID,Name))
+          cur.execute("""INSERT INTO sections (SecID,SubjID,InstID,Name) VALUES(%s,%s,%s,%s)"""%(SecID,Name,SubjID,InstID))
      except Exception,error:
           print(error)
      finally:

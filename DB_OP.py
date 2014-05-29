@@ -15,7 +15,7 @@ def initializing():
     try:
         connect()    
         cur = connect().cursor()
-        
+               
 
         CTAT="""CREATE TABLE attendance(StdID INT(9),SecID INT(9),absents INT(2),RegDate DATE)"""
         cur.execute(CTAT)
@@ -42,7 +42,7 @@ def initializing():
         #CTSU is a variable includes creating table for subjects.
 
 
-        CTSE="""CREATE TABLE sections (SecID INT(9) NOT NULL,Name char(20),SubjID int(9),InstID int(9))"""
+        CTSE="""CREATE TABLE sections (SecID INT(9) NOT NULL,SubjID int(9),InstID int(9),Name char(20))"""
         cur.execute(CTSE)
         #CTSE is a variable includes creating table for sections.
 

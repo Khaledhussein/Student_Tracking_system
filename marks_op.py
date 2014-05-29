@@ -34,7 +34,7 @@ def Pmark(StdID,SecID,PartisMark="NULL"):
      finally:
           edit.commit()
           DB_OP.disconnect()
-def Fmark(StdID,SecID,FinalMark="NULL"):
+def Fimark(StdID,SecID,FinalMark="NULL"):
      try:
           edit = DB_OP.connect()
           cur=edit.cursor()
@@ -82,15 +82,4 @@ def query():
      print Q.fetchall()
 
 
-"""
-def delete(StdID,SecID):
-     try:
-          edit = DB_OP.connect()
-          cur=edit.cursor()
-          cur.execute("DELETE FROM marks WHERE StdID=%s AND SecID =%s"%(StdID,SecID))
-     except Exception,error:
-         print(error)
-     finally:
-          edit.commit()
-          DB_OP.disconnect()
-"""
+Fmark(1,1,2)
