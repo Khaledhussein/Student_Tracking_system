@@ -7,7 +7,7 @@ def att(StdID,SecID,absents="NULL",RegDate="NULL"):
      try:
           con = DB_OP.connect()
           cur=con.cursor()
-          cur.execute("""INSERT INTO attendance (StdID,SecID,absents,RegDate) VALUES('%s','%s',%s,%s)"""%(StdID,SecID,absents,RegDate))
+          cur.execute("""INSERT INTO attendance (StdID,SecID,absents,RegDate) VALUES(%s,%s,%s,%s)"""%(StdID,SecID,absents,RegDate))
      except Exception,error:
           print(error)
      finally:
@@ -31,7 +31,7 @@ def query():
           print r
      Q=con.cursor()
      Q.execute("select * from attendance")
-     print Q.fetchall()
+     return Q.fetchall()
 
 def delete(StdID,SecID):
      try:

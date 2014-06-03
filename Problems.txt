@@ -1,0 +1,3 @@
+Attendances:RegDate coloumn promblem
+MySQL Command : i Can't make be done
+Nulling Can't be done (not necessary)

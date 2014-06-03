@@ -37,7 +37,7 @@ def initializing():
         #CTST is a variable includes creating table for students.
 
 
-        CTSU="""CREATE TABLE subjects (SubjID INT(9) NOT NULL PRIMARY KEY,Name char(20),Description varchar(50))"""
+        CTSU="""CREATE TABLE subjects (SubjID INT(9) NOT NULL PRIMARY KEY,Name char(20),Description varchar(20))"""
         cur.execute(CTSU)
         #CTSU is a variable includes creating table for subjects.
 
@@ -81,5 +81,6 @@ def CLS():
         print cur.fetchall()
     except Exception,r:
         print r
+    finally:
         cur.commit()
         disconnect()

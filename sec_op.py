@@ -24,7 +24,7 @@ def query():
           print r
      Q=con.cursor()
      Q.execute("select * from sections")
-     print Q.fetchall()
+     return Q.fetchall()
 
 
 def delete(SecID,SubjID,InstID):

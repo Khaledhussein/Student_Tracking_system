@@ -35,4 +35,4 @@ def query():
           print r
      Q=con.cursor()
      Q.execute("select * from instructors")
-     print Q.fetchall()
+     return Q.fetchall()
