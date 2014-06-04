@@ -72,15 +72,12 @@ def initializing():
     finally:
         disconnect()
 
-def CLS():
-    try:
-        Command=input("insert your MySQL statment starting with \" and finsh it with\" : \n")
-        connect()
-        cur=connect().cursor()
-        cur.execute(Command)
+def CLS(Command):
+    con=connect()
+    cur=con.cursor()
+    cur.execute(Command)
+    if "select" in Command :
         print cur.fetchall()
-    except Exception,r:
-        print r
-    finally:
-        cur.commit()
-        disconnect()
+    else :
+        con.commit()
+    disconnect()        

@@ -263,7 +263,7 @@ Please select your operation
 #RegDate format problem
                     for row in x:
                          for val in row:
-                              print "|","{:20}".format(val),"|",
+                              print "|","{%s:20}"%(val),"|",
                          print
                     print "---------------------------------------------------------------------------------------------------"
                elif Atselect == 4:
@@ -361,12 +361,14 @@ Please select your operation
      elif select == 7:
           while True:
                print"""
+Select your operation
 (1) Write your own MySQL statment
 (2) Exit
 """
                LL=input("\n")
                if LL == 1:
-                    DB_OP.CLS()
+                    Command=raw_input("Write your MySQL statment please")
+                    DB_OP.CLS(Command)
                elif LL == 2:
                     break
      elif select == 8:
