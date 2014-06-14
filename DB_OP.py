@@ -3,10 +3,11 @@
 
 ###########################
 import MySQLdb
-
+import os
+import shutil, errno
 ###########################
 def connect():
-    x=MySQLdb.connect('127.0.0.1', 'root', '', 'sts');
+    x=MySQLdb.connect('127.0.0.1', 'root', 'khaled', 'sts');
     return x
 def disconnect():
     y=connect().close()
@@ -73,11 +74,26 @@ def initializing():
         disconnect()
 
 def CLS(Command):
-    con=connect()
-    cur=con.cursor()
-    cur.execute(Command)
-    if "select" in Command :
-        print cur.fetchall()
-    else :
-        con.commit()
-    disconnect()        
+    try:
+        con=connect()
+        cur=con.cursor()
+        cur.execute(Command)
+        if "select" in Command :
+            print cur.fetchall()
+        else :
+            con.commit()
+    except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
+    finally:
+        disconnect()        
+
+def Export():
+    if os.path.exists("C:\\Users\\user\\Desktop\\BackUP\\sts"):
+        shutil.rmtree("C:\\Users\\user\\Desktop\\BackUP\\sts")
+    shutil.copytree("C:\\wamp\\bin\\mysql\\mysql5.5.20\\data\\sts","C:\\Users\\user\\Desktop\\BackUP\\sts")
+    
+def Import():
+    if os.path.exists("C:\\wamp\\bin\\mysql\\mysql5.5.20\\data\\sts"):
+        shutil.rmtree("C:\\wamp\\bin\\mysql\\mysql5.5.20\\data\\sts")
+    shutil.copytree("C:\\Users\\user\\Desktop\\BackUP\\sts","C:\\wamp\\bin\\mysql\\mysql5.5.20\\data\\sts")
+    

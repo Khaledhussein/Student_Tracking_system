@@ -9,8 +9,8 @@ def Fmark(StdID,SecID,FirstExamMark="NULL"):
           con=DB_OP.connect()
           cur=con.cursor()
           cur.execute("""INSERT INTO marks (StdID,SecID,FirstExamMark) VALUES(%d,%d,%d)"""%(StdID,SecID,FirstExamMark))
-     except Exception,error:
-          print(error)
+     except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
      finally:
           con.commit()
           DB_OP.disconnect()
@@ -19,8 +19,8 @@ def Smark(StdID,SecID,SecondExamMark="NULL"):
           edit = DB_OP.connect()
           cur=edit.cursor()
           cur.execute("UPDATE sts.marks SET SecondExamMark=%d WHERE marks.StdID=%d AND marks.SecID=%d"%(SecondExamMark,StdID,SecID))
-     except Exception,error:
-         print(error)
+     except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
      finally:
           edit.commit()
           DB_OP.disconnect()
@@ -29,8 +29,8 @@ def Pmark(StdID,SecID,PartisMark="NULL"):
           edit = DB_OP.connect()
           cur=edit.cursor()
           cur.execute("UPDATE sts.marks SET PartisMark=%d WHERE marks.StdID=%d AND marks.SecID=%d"%(PartisMark,StdID,SecID))
-     except Exception,error:
-         print(error)
+     except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
      finally:
           edit.commit()
           DB_OP.disconnect()
@@ -39,8 +39,8 @@ def Fimark(StdID,SecID,FinalExamMark="NULL"):
           edit = DB_OP.connect()
           cur=edit.cursor()
           cur.execute("UPDATE sts.marks SET FinalExamMark=%d WHERE marks.StdID=%d AND marks.SecID=%d"%(FinalExamMark,StdID,SecID))
-     except Exception,error:
-         print(error)
+     except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
      finally:
           edit.commit()
           DB_OP.disconnect()
@@ -53,8 +53,8 @@ def update(StdID,SecID,NStdID,NSecID,FirstExamMark,SecondExamMark,PartisMark,Fin
           edit = DB_OP.connect()
           cur=edit.cursor()
           cur.execute("UPDATE sts.marks SET StdID=%d,SecID=%d,FirstExamMark=%d,SecondExamMark=%d,PartisMark=%d,FinalExamMark=%d WHERE marks.StdID=%d AND marks.SecID=%d"%(NStdID,NSecID,FirstExamMark,SecondExamMark,PartisMark,FinalExamMark,StdID,SecID))
-     except Exception,error:
-         print(error)
+     except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
      finally:
           edit.commit()
           DB_OP.disconnect()
@@ -67,15 +67,15 @@ def querymarks(StdID,SecID):
           Q.execute("select * from marks WHERE StdID =%d AND SecID=%d"%(StdID,SecID))
           x= Q.fetchall()
           return x 
-     except Exception,r:
-          print r
+     except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
 
 
 def query():
      try:
           con=DB_OP.connect()
-     except Exception,r:
-          print r
+     except MySQLdb.Error as err:
+          print("Something went wrong: {}".format(err[1]))
      Q=con.cursor()
      Q.execute("select * from marks")
      return Q.fetchall()

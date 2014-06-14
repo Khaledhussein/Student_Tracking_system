@@ -14,17 +14,17 @@ print """
                       #                                          #
                       ############################################
 """
-try:
-     CNDB=input("To create your database please press 1 , If you already have a database press anykey \n")
-     if CNDB ==1:
+while True:
+     CNDB=raw_input("To create your database please press 1 , If you already have a database press 2 \n")
+     CNDB="\""+CNDB+"\""
+     if  "1" not in CNDB and "2" not in CNDB:
+          print "Sorry invalid input"
+     if "1" in CNDB:
           DB_OP.initializing()
-     else:
-          print "You have now a database"
-
-except Exception,r:
-     print (r)
-
-
+          break
+     elif "2" in CNDB :
+          break
+     
 while True:
      print """
 Please select your category:
@@ -35,7 +35,9 @@ Please select your category:
 (5) Attendance operations
 (6) Marks operations
 (7) Make your own MySQL statement
-(8) Exit
+(8) Backup your DataBase
+(9) Load your backedup DataBase
+(10) Exit
 """
      select=input("\n")
      if select==1:
@@ -252,20 +254,19 @@ Please select your operation
                     att_op.update(StdID,SecID,NStdID,NSecID,absents,RegDate)
                elif Atselect == 3:
                     A=att_op.query()
-                    print "---------------------------------------------------------------------------------------------------"
-                    print ("|\tStdID \t       | | SecID         \t| |    Absents  \t | |RegDate\t\t|")
-                    print "---------------------------------------------------------------------------------------------------"
+                    print "-------------------------------------------------------------------------"
+                    print ("|\t StdID \t| |\t SecID \t| |\tAbsents\t| |\tRegDate\t\t|")
+                    print "-------------------------------------------------------------------------"
                     x=[]
                     for i in A:
                          x.append(list(i))
                     for i in range (0,len(x)):
                          x[i][0]=int(x[i][0])
-#RegDate format problem
                     for row in x:
                          for val in row:
-                              print "|","{%s:20}"%(val),"|",
+                              print "|","\t","%s"%(val),"\t","|",
                          print
-                    print "---------------------------------------------------------------------------------------------------"
+                    print "-------------------------------------------------------------------------"
                elif Atselect == 4:
                     SecID=input("Please insert the section's ID: ")
                     StdID=input("Please insert the student's ID: ")
@@ -367,10 +368,14 @@ Select your operation
 """
                LL=input("\n")
                if LL == 1:
-                    Command=raw_input("Write your MySQL statment please")
+                    Command=raw_input("Write your MySQL statment please:\n")
                     DB_OP.CLS(Command)
                elif LL == 2:
                     break
      elif select == 8:
+          DB_OP.Export()
+     elif select == 9:
+          DB_OP.Import()
+     elif select == 10:
           print "Bye Bye :)"
           break
